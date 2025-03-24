@@ -10,7 +10,7 @@ const lambda = new AWS.Lambda({
  * @param {string} cliente - Nombre o ID del cliente.
  * @returns {Promise<{ accessKey: string, secretKey: string }>} - Credenciales obtenidas.
  */
-async function obtenerCredenciales(cliente) {
+export async function obtenerCredenciales(cliente) {
   try {
     const params = {
       FunctionName: "NombreDeTuLambda", // Reemplázalo con el nombre de tu Lambda
@@ -27,6 +27,9 @@ async function obtenerCredenciales(cliente) {
       throw new Error("Las credenciales no fueron retornadas correctamente.");
     }
 
+    process.env.AWS_ACCESS_KEY_ID = accessKey;
+    process.env.AWS_SECRET_ACCESS_KEY = secretKey;
+    
     return { accessKey: data.accessKey, secretKey: data.secretKey };
   } catch (error) {
     console.error("Error invocando Lambda:", error.message);
