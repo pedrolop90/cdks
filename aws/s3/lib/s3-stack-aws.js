@@ -11,10 +11,10 @@ class S3Stack extends cdk.Stack {
     // Crear un bucket en S3
     new s3.Bucket(this, "MyS3Bucket", {
       bucketName: props.s3Name,
-      versioned: true, // Habilitar versionado
-      removalPolicy: cdk.RemovalPolicy.RETAIN, // Retener el bucket al eliminar el stack
-      autoDeleteObjects: false, // No eliminar los objetos automáticamente
-      publicReadAccess: false, // No acceso público
+      versioned: true, 
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      autoDeleteObjects: true,
+      publicReadAccess: false, 
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL, // Bloquear todo el acceso público
     });
   }

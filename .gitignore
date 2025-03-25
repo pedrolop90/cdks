@@ -53,3 +53,6 @@ build/
 
 # Configuración de AWS SAM (Opcional)
 .aws-sam/
+
+
+*.zip
