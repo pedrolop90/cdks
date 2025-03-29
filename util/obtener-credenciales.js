@@ -11,7 +11,7 @@ const lambda = new AWS.Lambda({
  * @param {string} cliente - Nombre o ID del cliente.
  * @returns {Promise<{ accessKey: string, secretKey: string }>} - Credenciales obtenidas.
  */
-export async function obtenerCredenciales(request) {
+async function obtenerCredenciales(request) {
   try {
     const params = {
       FunctionName: request.functionNameObtenerCredenciales, // Reemplázalo con el nombre de tu Lambda
@@ -38,7 +38,5 @@ export async function obtenerCredenciales(request) {
   }
 }
 
-// Ejemplo de uso
-obtenerCredenciales("cliente123")
-  .then((credenciales) => console.log("Credenciales:", credenciales))
-  .catch((err) => console.error("Error:", err.message));
+
+module.exports = { obtenerCredenciales };
