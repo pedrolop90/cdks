@@ -8,5 +8,5 @@ const { obtenerCredenciales } = require('../obtener-credenciales');
 let variables = obtenerConfiguracion();
 obtenerCredenciales(variables);
 const app = new cdk.App();
-new S3Stack(app, "S3Stack", variables);
+new S3Stack(app, variables.idStack, variables);
 
