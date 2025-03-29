@@ -32,6 +32,11 @@ async function obtenerCredenciales(request) {
     process.env.AWS_ACCESS_KEY_ID = data.access_key;
     process.env.AWS_SECRET_ACCESS_KEY = data.secret_key;
     
+    AWS.config.update({
+      accessKeyId: data.access_key,
+      secretAccessKey: data.secret_key,
+    });
+
   } catch (error) {
     console.error("Error invocando Lambda:", error.message);
     throw error; // Relanzar el error para manejarlo externamente
