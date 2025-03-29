@@ -41,10 +41,18 @@ async function obtenerCredenciales() {
 if (require.main === module) {
   obtenerCredenciales()
     .then((credenciales) => {
-      console.log(JSON.stringify(credenciales)); // 🔥 Devuelve solo JSON en la salida estándar
+      const arg = process.argv[2]; // Toma el argumento de la línea de comandos
+
+      if (arg === "accessKey") {
+        console.log(credenciales.accessKey);
+      } else if (arg === "secretKey") {
+        console.log(credenciales.secretKey);
+      } else {
+        console.log(JSON.stringify(credenciales)); // Si no hay argumento, imprime todo
+      }
     })
     .catch((error) => {
       console.error("❌ Error al obtener credenciales:", error);
-      process.exit(1); // Detiene la ejecución con error
+      process.exit(1);
     });
 }
