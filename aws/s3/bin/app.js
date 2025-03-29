@@ -2,6 +2,8 @@ require('dotenv').config();
 
 const { obtenerConfiguracion } = require('./obtener-variables-entorno');
 const { obtenerCredenciales } = require('../obtener-credenciales');
+const path = require("path");
+const fs = require("fs");
 
 async function main() {
     let variables = obtenerConfiguracion();
