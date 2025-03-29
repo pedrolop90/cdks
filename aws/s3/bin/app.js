@@ -10,8 +10,6 @@ async function main() {
 
     const app = new cdk.App();
     new S3Stack(app, variables.idStack, variables);
-
-    app.synth();
 }
 
 
