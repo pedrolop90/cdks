@@ -2,9 +2,6 @@ require('dotenv').config();
 
 const { obtenerConfiguracion } = require('./obtener-variables-entorno');
 const { obtenerCredenciales } = require('../obtener-credenciales');
-const path = require("path");
-const fs = require("fs");
-const os = require("os");
 
 async function main() {
     let variables = obtenerConfiguracion();
@@ -20,19 +17,15 @@ async function main() {
 
     // 🔥 Crear una nueva instancia de credenciales y forzar a CDK a usarlas
     const aws = require("aws-sdk");
-    const awsCredentialsPath = path.join(os.homedir(), ".aws", "credentials");
-    const profileName = "dynamic-profile";
+    aws.config.credentials = new aws.Credentials(credenciales.accessKey, credenciales.secretKey);
 
-    const credentialsFileContent = `
-[${profileName}]
-aws_access_key_id=${credenciales.accessKey}
-aws_secret_access_key=${credenciales.secretKey}
-    `.trim();
+    
+    // 🔥 Usar `AWS.CredentialProviderChain` para asegurarse de que CDK tome estas credenciales
+    aws.config.credentialProvider = new aws.CredentialProviderChain([
+        () => new aws.Credentials(credenciales.accessKey, credenciales.secretKey),
+      ]);
 
-    fs.writeFileSync(awsCredentialsPath, credentialsFileContent, { flag: "w" });
-
-    // 🔥 Usar el nuevo perfil en CDK
-    process.env.AWS_PROFILE = profileName;
+    process.env.AWS_SDK_LOAD_CONFIG = "1";
 
     const cdk = require("aws-cdk-lib");
     const { S3Stack } = require('../lib/s3-stack-aws');
