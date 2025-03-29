@@ -1,0 +1,21 @@
+{
+    "name": "aws-lambda-cdk-creator",
+    "version": "1.0.0",
+    "description": "Proyecto AWS CDK standalone con Axios",
+    "main": "bin/app.js",
+    "scripts": {
+        "build": "npm install",
+        "deploy": "cdk deploy --all --require-approval never",
+        "deploy-local": "cdk deploy",
+        "destroy": "cdk destroy --force"
+    },
+    "dependencies": {
+        "aws-cdk-lib": "^2.120.0",
+        "aws-sdk": "^2.1692.0",
+        "constructs": "^10.3.0",
+        "dotenv": "^16.4.7"
+    },
+    "devDependencies": {
+        "aws-cdk": "^2.120.0"
+    }
+}

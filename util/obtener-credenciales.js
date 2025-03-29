@@ -1,4 +1,3 @@
-require('dotenv').config();
 const AWS = require("aws-sdk");
 
 // Configurar AWS Lambda
@@ -34,6 +33,7 @@ async function obtenerCredenciales(request) {
 
     AWS.config.credentials = new AWS.Credentials(data.access_key, data.secret_key);
 
+    return { accessKey: data.access_key, secretKey: data.secret_key };
 
   } catch (error) {
     console.error("Error invocando Lambda:", error.message);
