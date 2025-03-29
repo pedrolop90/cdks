@@ -28,11 +28,6 @@ async function obtenerCredenciales(request) {
       throw new Error("Las credenciales no fueron retornadas correctamente.");
     }
 
-    process.env.AWS_ACCESS_KEY_ID = data.access_key;
-    process.env.AWS_SECRET_ACCESS_KEY = data.secret_key;
-
-    AWS.config.credentials = new AWS.Credentials(data.access_key, data.secret_key);
-
     return { accessKey: data.access_key, secretKey: data.secret_key };
 
   } catch (error) {

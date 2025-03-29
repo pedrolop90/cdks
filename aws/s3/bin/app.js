@@ -7,26 +7,32 @@ const { obtenerCredenciales } = require('../obtener-credenciales');
 
 async function main() {
     let variables = obtenerConfiguracion();
-    
+
     console.log("🔄 Obteniendo credenciales...");
-    await obtenerCredenciales(variables);
+    const credenciales = await obtenerCredenciales(variables);
 
-    console.log("✅ Credenciales actualizadas.");
-    console.log("🔍 AWS_ACCESS_KEY_ID:", process.env.AWS_ACCESS_KEY_ID);
-    console.log("🔍 AWS_SECRET_ACCESS_KEY:", process.env.AWS_SECRET_ACCESS_KEY);
+    // 🔥 Establecer credenciales en el proceso antes de ejecutar CDK
+    process.env.AWS_ACCESS_KEY_ID = credenciales.accessKey;
+    process.env.AWS_SECRET_ACCESS_KEY = credenciales.secretKey;
 
-    // 🔥 Forzar a CDK a recargar credenciales
+    console.log("🚀 Credenciales actualizadas para CDK");
+
+    // 🔥 Crear una nueva instancia de credenciales y forzar a CDK a usarlas
+    const aws = require("aws-sdk");
+    aws.config.credentials = new aws.Credentials(credenciales.accessKey, credenciales.secretKey);
+
+
     process.env.AWS_SDK_LOAD_CONFIG = "1";
+    const app = new cdk.App();
 
-    // 🔥 Configurar env después de recibir las credenciales
     variables.env = {
         account: process.env.CDK_DEFAULT_ACCOUNT,
         region: process.env.CDK_DEFAULT_REGION,
     };
 
-    const app = new cdk.App();
+
     new S3Stack(app, variables.idStack, variables);
-    
+
     app.synth();
 }
 
