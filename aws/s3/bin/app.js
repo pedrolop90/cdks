@@ -9,6 +9,13 @@ async function main() {
     let variables = obtenerConfiguracion();
 
     const app = new cdk.App();
+
+    variables.env = {
+        account: process.env.CDK_DEFAULT_ACCOUNT,
+        region: process.env.CDK_DEFAULT_REGION,
+    };
+
+
     new S3Stack(app, variables.idStack, variables);
 }
 
