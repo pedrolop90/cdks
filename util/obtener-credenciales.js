@@ -22,6 +22,7 @@ async function obtenerCredenciales(request) {
     const response = await lambda.invoke(params).promise();
 
     // Parsear la respuesta de Lambda
+    console.log(response);
     const data = JSON.parse(response.Payload);
 
     if (!data.access_key || !data.secret_key) {
