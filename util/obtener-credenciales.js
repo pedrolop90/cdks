@@ -24,14 +24,13 @@ async function obtenerCredenciales(request) {
     // Parsear la respuesta de Lambda
     const data = JSON.parse(response.Payload);
 
-    if (!data.accessKey || !data.secretKey) {
+    if (!data.access_key || !data.secret_key) {
       throw new Error("Las credenciales no fueron retornadas correctamente.");
     }
 
-    process.env.AWS_ACCESS_KEY_ID = accessKey;
-    process.env.AWS_SECRET_ACCESS_KEY = secretKey;
+    process.env.AWS_ACCESS_KEY_ID = access_key;
+    process.env.AWS_SECRET_ACCESS_KEY = secret_key;
     
-    return { accessKey: data.access_key, secretKey: data.secret_key };
   } catch (error) {
     console.error("Error invocando Lambda:", error.message);
     throw error; // Relanzar el error para manejarlo externamente
