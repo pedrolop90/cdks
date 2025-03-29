@@ -29,8 +29,8 @@ async function obtenerCredenciales(request) {
       throw new Error("Las credenciales no fueron retornadas correctamente.");
     }
 
-    process.env.AWS_ACCESS_KEY_ID = access_key;
-    process.env.AWS_SECRET_ACCESS_KEY = secret_key;
+    process.env.AWS_ACCESS_KEY_ID = data.access_key;
+    process.env.AWS_SECRET_ACCESS_KEY = data.secret_key;
     
   } catch (error) {
     console.error("Error invocando Lambda:", error.message);
