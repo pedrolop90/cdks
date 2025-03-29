@@ -38,4 +38,13 @@ async function obtenerCredenciales() {
 }
 
 
-module.exports = { obtenerCredenciales };
+if (require.main === module) {
+  obtenerCredenciales()
+    .then((credenciales) => {
+      console.log(JSON.stringify(credenciales)); // 🔥 Devuelve solo JSON en la salida estándar
+    })
+    .catch((error) => {
+      console.error("❌ Error al obtener credenciales:", error);
+      process.exit(1); // Detiene la ejecución con error
+    });
+}
