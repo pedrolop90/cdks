@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-const cdk = require("aws-cdk-lib");
 const { obtenerConfiguracion } = require('./obtener-variables-entorno');
 const { S3Stack } = require('../lib/s3-stack-aws');
 const { obtenerCredenciales } = require('../obtener-credenciales');
@@ -23,6 +22,8 @@ async function main() {
 
 
     process.env.AWS_SDK_LOAD_CONFIG = "1";
+    
+    const cdk = require("aws-cdk-lib");
     const app = new cdk.App();
 
     variables.env = {
