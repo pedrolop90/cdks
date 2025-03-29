@@ -5,7 +5,7 @@
     "main": "bin/app.js",
     "scripts": {
         "build": "npm install",
-        "deploy": "cdk deploy --require-approval never",
+        "deploy": "cdk deploy --all --require-approval never",
         "deploy-local": "cdk deploy",
         "destroy": "cdk destroy --force"
     },

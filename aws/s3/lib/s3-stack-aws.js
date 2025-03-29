@@ -9,7 +9,7 @@ class S3Stack extends cdk.Stack {
     
 
     // Crear un bucket en S3
-    new s3.Bucket(this, "MyS3Bucket", {
+    new s3.Bucket(this, props.idStack, {
       bucketName: props.s3Name,
       versioned: true, 
       removalPolicy: cdk.RemovalPolicy.DESTROY,
