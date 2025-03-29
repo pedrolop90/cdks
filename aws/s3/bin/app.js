@@ -21,8 +21,8 @@ async function main() {
 
     
     // 🔥 Usar `AWS.CredentialProviderChain` para asegurarse de que CDK tome estas credenciales
-    AWS.config.credentialProvider = new AWS.CredentialProviderChain([
-        () => new AWS.Credentials(credenciales.accessKey, credenciales.secretKey),
+    aws.config.credentialProvider = new aws.CredentialProviderChain([
+        () => new aws.Credentials(credenciales.accessKey, credenciales.secretKey),
       ]);
 
     process.env.AWS_SDK_LOAD_CONFIG = "1";
