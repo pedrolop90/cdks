@@ -1,3 +1,4 @@
+require('dotenv').config();
 const AWS = require("aws-sdk");
 
 // Configurar AWS Lambda
@@ -10,12 +11,12 @@ const lambda = new AWS.Lambda({
  * @param {string} cliente - Nombre o ID del cliente.
  * @returns {Promise<{ accessKey: string, secretKey: string }>} - Credenciales obtenidas.
  */
-async function obtenerCredenciales(request) {
+async function obtenerCredenciales() {
   try {
     const params = {
-      FunctionName: request.functionNameObtenerCredenciales, // Reemplázalo con el nombre de tu Lambda
+      FunctionName: process.env.FunctionNameObtenerCredenciales, // Reemplázalo con el nombre de tu Lambda
       InvocationType: "RequestResponse", // Espera respuesta
-      Payload: JSON.stringify({ proyecto_id: request.proyecto_id }),
+      Payload: JSON.stringify({ proyecto_id: process.env.PROYECTO_ID }),
     };
 
     const response = await lambda.invoke(params).promise();
