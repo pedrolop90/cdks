@@ -21,8 +21,6 @@ async function obtenerCredenciales() {
 
     const response = await lambda.invoke(params).promise();
 
-    // Parsear la respuesta de Lambda
-    console.log(response);
     const data = JSON.parse(response.Payload);
 
     if (!data.access_key || !data.secret_key) {
@@ -33,7 +31,7 @@ async function obtenerCredenciales() {
 
   } catch (error) {
     console.error("Error invocando Lambda:", error.message);
-    throw error; // Relanzar el error para manejarlo externamente
+    throw error; 
   }
 }
 
