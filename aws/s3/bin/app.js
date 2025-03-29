@@ -6,7 +6,7 @@ const { S3Stack } = require('../lib/s3-stack-aws');
 const { obtenerCredenciales } = require('../obtener-credenciales');
 
 let variables = obtenerConfiguracion();
-obtenerCredenciales(variables);
+await obtenerCredenciales(variables);
 const app = new cdk.App();
 
 variables.env = {
