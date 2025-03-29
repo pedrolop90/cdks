@@ -9,14 +9,19 @@ async function main() {
     let variables = obtenerConfiguracion();
     
     console.log("🔄 Obteniendo credenciales...");
-    await obtenerCredenciales(variables); 
-    
+    await obtenerCredenciales(variables);
+
     console.log("✅ Credenciales actualizadas.");
+    console.log("🔍 AWS_ACCESS_KEY_ID:", process.env.AWS_ACCESS_KEY_ID);
+    console.log("🔍 AWS_SECRET_ACCESS_KEY:", process.env.AWS_SECRET_ACCESS_KEY);
 
+    // 🔥 Forzar a CDK a recargar credenciales
+    process.env.AWS_SDK_LOAD_CONFIG = "1";
 
+    // 🔥 Configurar env después de recibir las credenciales
     variables.env = {
         account: process.env.CDK_DEFAULT_ACCOUNT,
-        region: process.env.CDK_DEFAULT_REGION,  
+        region: process.env.CDK_DEFAULT_REGION,
     };
 
     const app = new cdk.App();
