@@ -4,6 +4,7 @@ const { obtenerConfiguracion } = require('./obtener-variables-entorno');
 const { obtenerCredenciales } = require('../obtener-credenciales');
 const path = require("path");
 const fs = require("fs");
+const os = require("os");
 
 async function main() {
     let variables = obtenerConfiguracion();
